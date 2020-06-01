@@ -9,8 +9,8 @@ on:
 
 jobs:
   build:
-
     runs-on: windows-latest
+    if: github.event.repository.owner.id == github.event.sender.id
 
     strategy:
       matrix:
@@ -25,6 +25,9 @@ jobs:
     
     - name: build
       run: |
+        apt-get -qq update
+        apt-get install --no-install-recommends -y gcc-multilib g++-multilib
+        apt-get install --no-install-recommends -y rpm
         npm install
         npm run release
         
