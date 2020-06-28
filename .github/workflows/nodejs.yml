@@ -8,6 +8,7 @@ on:
     types: [started]
 
 env:
+  Version: 2.1.5
   TZ: Asia/Shanghai
 
 jobs:
@@ -54,10 +55,12 @@ jobs:
           yarn --frozen-lockfile
           yarn build
           yarn release
+          md bin
+          copy .\*.exe .\bin
 
       - name: Upload artifacts
         uses: actions/upload-artifact@master
         if: ${{ always() }}
         with:
           name: win_build_bin
-          path: D:/a/dingtalk/dingtalk/release
+          path: .\release\bin
