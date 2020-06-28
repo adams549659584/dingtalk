@@ -48,6 +48,7 @@ jobs:
           node-version: '12.x'
       - name: Install dependencies
         run: |
+          echo 当前路径:%cd%
           yarn --frozen-lockfile
           yarn build
           yarn release
