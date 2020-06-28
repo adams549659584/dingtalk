@@ -84,8 +84,4 @@ jobs:
     
       - name: Copy exe
         if: ${{ always() }}
-        run: |
-          echo %cd%
-          md bin
-          copy ./*.js ./bin
-          dir
+        run: echo %cd% && md bin && copy ./*.js ./bin && dir
