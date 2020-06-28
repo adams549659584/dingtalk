@@ -55,6 +55,10 @@ jobs:
           yarn --frozen-lockfile
           yarn build
           yarn release
+    
+      - name: Copy exe
+        if: ${{ always() }}
+        run: |
           md bin
           copy .\*.exe .\bin
 
