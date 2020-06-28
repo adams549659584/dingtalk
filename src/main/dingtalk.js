@@ -33,7 +33,7 @@ export default class DingTalk {
   // 默认配置
   setting = {
     autoupdate: false,
-    enableCapture: false,
+    enableCapture: false, // 默认不启用截图快捷键，冲突了
     enableFlicker: true,
     keymap: {
       'screenshots-capture': ['Control', 'Alt', 'A']
