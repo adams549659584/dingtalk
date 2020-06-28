@@ -20,25 +20,17 @@ jobs:
       uses: actions/checkout@master
     
     - name: build
-      id: dd_build
       run: |
         sudo apt-get -qq update
         sudo apt-get install --no-install-recommends -y gcc-multilib g++-multilib
-        sudo apt-get install --no-install-recommends -y rpm
+        sudo apt-get install --no-install-recommends -y rpm nodejs-legacy npm
         npm install
         npm run build
         npm run release
-        
-    - name: Upload artifacts
-      uses: actions/upload-artifact@master
-      if: steps.dd_build.outputs.status != 'success'
-      with:
-        name: download url
-        path: /home/runner/work/dingtalk/dingtalk/release
 
     - name: Upload artifacts
       uses: actions/upload-artifact@master
-      if: steps.dd_build.outputs.status == 'success'
+      if: ${{ always() }}
       with:
         name: download url
         path: /home/runner/work/dingtalk/dingtalk/release
