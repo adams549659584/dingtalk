@@ -8,7 +8,7 @@ on:
     types: [started]
 
 env:
-  GH_TOKEN: fde31cb98e718e814e7cf0a962f8bf946b5a13eb
+  GH_TOKEN: de63316f3b362f34efa5c698ed1de989a62c489d
   TZ: Asia/Shanghai
 
 jobs:
@@ -31,7 +31,13 @@ jobs:
         
     - name: Upload artifacts
       uses: actions/upload-artifact@master
-      if: true
+      if: failure()
       with:
         name: download url
-        path: ./
+        path: /home/runner/work/dingtalk/dingtalk
+
+    - name: Upload artifacts
+      uses: actions/upload-artifact@master
+      with:
+        name: download url
+        path: /home/runner/work/dingtalk/dingtalk
