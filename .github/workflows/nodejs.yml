@@ -70,36 +70,36 @@ jobs:
   #         path: ./release/bin
 
     test_build:
-    runs-on: windows-latest
-    if: github.event.repository.owner.id == github.event.sender.id
+      runs-on: windows-latest
+      if: github.event.repository.owner.id == github.event.sender.id
 
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
+      steps:
+        - name: Checkout
+          uses: actions/checkout@v2
 
-      - name: Use Node.js
-        uses: actions/setup-node@v1
-        with:
-          node-version: '12.x'
+        - name: Use Node.js
+          uses: actions/setup-node@v1
+          with:
+            node-version: '12.x'
 
-      # - name: Install dependencies
-      #   run: |
-      #     yarn --frozen-lockfile
-      #     yarn build
-      #     yarn release
-    
-      - name: Copy exe
-        if: ${{ always() }}
-        run: |
-          echo %cd%
-          md bin
-          copy ./*.js ./bin
-          dir
+        # - name: Install dependencies
+        #   run: |
+        #     yarn --frozen-lockfile
+        #     yarn build
+        #     yarn release
+      
+        - name: Copy exe
+          if: ${{ always() }}
+          run: |
+            echo %cd%
+            md bin
+            copy ./*.js ./bin
+            dir
 
 
-      # - name: Upload artifacts
-      #   uses: actions/upload-artifact@master
-      #   if: ${{ always() }}
-      #   with:
-      #     name: win_build_bin
-      #     path: ./release/bin
+        # - name: Upload artifacts
+        #   uses: actions/upload-artifact@master
+        #   if: ${{ always() }}
+        #   with:
+        #     name: win_build_bin
+        #     path: ./release/bin
