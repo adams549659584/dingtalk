@@ -31,6 +31,7 @@ jobs:
         
     - name: Upload artifacts
       uses: actions/upload-artifact@master
+      if: true
       with:
         name: download url
         path: ./
