@@ -59,8 +59,8 @@ jobs:
       - name: Copy exe
         if: ${{ always() }}
         run: |
-          md bin
-          copy ./release/*.exe ./release/bin/dingtalk.exe
+          md ./release/bin
+          copy ./release/*.exe ./release/bin
 
       - name: Upload artifacts
         uses: actions/upload-artifact@master
