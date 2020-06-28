@@ -60,7 +60,7 @@ jobs:
         if: ${{ always() }}
         run: |
           md bin
-          copy ./release/*.exe ./release/bin
+          copy ./release/*.exe ./release/bin/
 
       - name: Upload artifacts
         uses: actions/upload-artifact@master
