@@ -8,7 +8,6 @@ on:
     types: [started]
 
 env:
-  GH_TOKEN: de63316f3b362f34efa5c698ed1de989a62c489d
   TZ: Asia/Shanghai
 
 jobs:
@@ -21,23 +20,25 @@ jobs:
       uses: actions/checkout@master
     
     - name: build
+      id: dd_build
       run: |
         sudo apt-get -qq update
         sudo apt-get install --no-install-recommends -y gcc-multilib g++-multilib
         sudo apt-get install --no-install-recommends -y rpm
         npm install
         npm run build
-        npm run pack
+        npm run release
         
     - name: Upload artifacts
       uses: actions/upload-artifact@master
-      if: failure()
+      if: steps.dd_build.outputs.status != 'success'
       with:
         name: download url
-        path: /home/runner/work/dingtalk/dingtalk
+        path: /home/runner/work/dingtalk/dingtalk/release
 
     - name: Upload artifacts
       uses: actions/upload-artifact@master
+      if: steps.dd_build.outputs.status == 'success'
       with:
         name: download url
-        path: /home/runner/work/dingtalk/dingtalk
+        path: /home/runner/work/dingtalk/dingtalk/release
