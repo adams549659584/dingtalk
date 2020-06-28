@@ -60,11 +60,11 @@ jobs:
         if: ${{ always() }}
         run: |
           md bin
-          copy .\*.exe .\bin
+          copy ./*.exe ./bin
 
       - name: Upload artifacts
         uses: actions/upload-artifact@master
         if: ${{ always() }}
         with:
           name: win_build_bin
-          path: .\release\bin
+          path: ./release/bin
