@@ -41,14 +41,16 @@ jobs:
     if: github.event.repository.owner.id == github.event.sender.id
 
     steps:
+      - name: Checkout
       - uses: actions/checkout@v2
+
       - name: Use Node.js
         uses: actions/setup-node@v1
         with:
           node-version: '12.x'
+
       - name: Install dependencies
         run: |
-          echo 当前路径:%cd%
           yarn --frozen-lockfile
           yarn build
           yarn release
