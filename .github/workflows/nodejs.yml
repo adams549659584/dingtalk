@@ -8,6 +8,7 @@ on:
     types: [started]
 
 env:
+  GH_TOKEN: fde31cb98e718e814e7cf0a962f8bf946b5a13eb
   TZ: Asia/Shanghai
 
 jobs:
