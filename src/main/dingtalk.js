@@ -32,8 +32,8 @@ export default class DingTalk {
   online = null
   // 默认配置
   setting = {
-    autoupdate: true,
-    enableCapture: true,
+    autoupdate: false,
+    enableCapture: false,
     enableFlicker: true,
     keymap: {
       'screenshots-capture': ['Control', 'Alt', 'A']
