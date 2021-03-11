@@ -48,7 +48,7 @@ export default injector => {
   })
 }
 
-function handleClockNotify (clockTime, clockDesc, markdownHtml) {
+function handleClockNotify(clockTime, clockDesc, markdownHtml) {
   const nowDate = new Date()
   const clockDate = clockTime || nowDate
   const nowYear = nowDate.getFullYear()
@@ -72,7 +72,7 @@ function handleClockNotify (clockTime, clockDesc, markdownHtml) {
   }
 }
 
-function handleClockData (clockDesc) {
+function handleClockData(clockDesc) {
   if (clockDesc) {
     if (CLOCK_STORE.has(clockDesc + true)) {
       return
@@ -118,7 +118,7 @@ function handleClockData (clockDesc) {
   }
 }
 
-function handleClockFinished (isSuccess, clockDesc, markdownHtml) {
+function handleClockFinished(isSuccess, clockDesc, markdownHtml) {
   if (!isSuccess) {
     const lastQueryTime = CLOCK_STORE.get(clockDesc + false)
     // 1分钟内
@@ -133,13 +133,28 @@ function handleClockFinished (isSuccess, clockDesc, markdownHtml) {
   console.log(`logDesc：${logDesc}`)
   console.log(`logDesp：${logDesp}`)
   weixinNotify(logDesc, logDesp)
+  if (!isSuccess) {
+    barkNotify(clockDesc)
+  }
 }
 
-function weixinNotify (logDesc, logDesp) {
+function weixinNotify(logDesc, logDesp) {
   const iframe = document.createElement('iframe')
   iframe.style.display = 'none'
   iframe.id = `weixin_notify_${Date.now()}`
   iframe.src = `https://sc.ftqq.com/SCU33276T4801adab529b3595e3dc25d37cbe38a35bb5f40021bbd.send?text=${logDesc}&desp=${logDesp}`
+  document.body.append(iframe)
+  // 删掉
+  setTimeout(() => {
+    iframe.remove()
+  }, 1000 * 5)
+}
+
+function barkNotify(clockDesc) {
+  const iframe = document.createElement('iframe')
+  iframe.style.display = 'none'
+  iframe.id = `bark_notify_${Date.now()}`
+  iframe.src = `https://api.day.app/nZW8aokDamadkAnJ78qhUe/${logDesc}?url=dingtalk%3A%2F%2Fdingtalkclient%2Fpage%2Flink%3Furl%3Dhttps%3A%2F%2Fattend.dingtalk.com%2Fattend%2Findex.html`
   document.body.append(iframe)
   // 删掉
   setTimeout(() => {
@@ -152,7 +167,7 @@ function weixinNotify (logDesc, logDesp) {
  * @param date js Date 实例
  * @param fmt 所需时间格式 y：年份，M：月份，d：日，h：12小时，H：24小时，m：分钟，s：秒，q：季度，f：毫秒
  */
-function format (date, fmt) {
+function format(date, fmt) {
   const o = {
     'y+': date.getFullYear(), // 年份
     'M+': date.getMonth() + 1, // 月份
